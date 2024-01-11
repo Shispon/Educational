@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фильтрация</title>
+    <style>
+        .filter-buttons {
+            margin-bottom: 15px;
+        }
+
+        .item {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        .filter-hidden {
+            display: none;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+    <div>
+        <input type="text" id="search-input" placeholder="Поиск по названию">
+    </div>
+
+    <div class="filter-buttons">
+        <button data-category="all">Все</button>
+        <button data-category="clothing">Одежда</button>
+        <button data-category="accessories">Аксессуары</button>
+    </div>
+
+    <div id="items-container">
+        <div class="item clothing">Кофта</div>
+        <div class="item accessories">Рюкзак</div>
+        <div class="item clothing">Джинсы</div>
+        <div class="item accessories">Часы</div>
+        <div class="item clothing">Футболка</div>
+        <div class="item accessories">Очки</div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            var currentCategory = "all"; // Изначально выбрана категория "Все"
+
+            $(".filter-buttons button").on("click", function() {
+                currentCategory = $(this).data("category");
+
+                if (currentCategory === "all") {
+                    $("#items-container .item").removeClass("filter-hidden");
+                } else {
+                    $("#items-container .item").each(function() {
+                        if ($(this).hasClass(currentCategory)) {
+                            $(this).removeClass("filter-hidden");
+                        } else {
+                            $(this).addClass("filter-hidden");
+                        }
+                    });
+                }
+            });
+
+            $("#search-input").on("input", function() {
+                var searchText = $(this).val().toLowerCase();
+
+                $("#items-container .item").each(function() {
+                    var itemName = $(this).text().toLowerCase();
+                    if ((currentCategory === "all" || $(this).hasClass(currentCategory)) && itemName.includes(searchText)) {
+                        $(this).removeClass("filter-hidden");
+                    } else {
+                        $(this).addClass("filter-hidden");
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

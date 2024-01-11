@@ -1,0 +1,50 @@
+.main-block__image,
+.whoweare__video {
+    display: none;
+}
+
+/* Убираем блок "About Us" в версии для печати */
+.whoweare {
+    display: none;
+}
+
+/* Уменьшаем отступы между блоками в версии для печати */
+.page__main-block > * {
+    margin-bottom: 40px; /* Установите желаемое значение отступа */
+}
+
+/* Скрываем нижний блок "Get in Touch" в версии для печати */
+.page__getintouch {
+    display: none;
+}
+/* Скрываем все кнопки */
+button,
+a.button,
+.main-block__button,
+.subscribe__button,
+.item-getintouch__button,
+.contact__button {
+    display: none;
+}
+
+.main-block__button {
+    display: none;
+}
+
+@media print {
+    .main-block__body {
+        padding-left: 0;
+    }
+}
+@media print {
+    .advantages__body {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    /* Изменяем стили блока advantages__column для печати */
+    .advantages__column {
+        flex: 1;
+        margin-right: 10px; /* Добавляем небольшой отступ между колонками */
+    }
+}
